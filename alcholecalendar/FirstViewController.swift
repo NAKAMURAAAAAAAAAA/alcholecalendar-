@@ -63,6 +63,23 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         
     }
     
+    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+        let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position)
+        
+        let realm = try! Realm()
+        let result = realm.objects(Event.self).filter("hungover == true")
+        // cellのデザインを変更
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let da = formatter.string(from: date)
+        for day in result{
+            if da == day.date{
+                cell.backgroundColor = UIColor.red
+            }
+        }
+        return cell
+    }
+    
 
     /*
     // MARK: - Navigation
