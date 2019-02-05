@@ -55,37 +55,38 @@ class SecondViewController: UIViewController{
     //ここまでtextfieldを数字にする
     
     @IBAction func Done(_ sender: Any) {
-        if CupOfBeer.text != "" || CupOfHighball.text != "" || CupOfWine.text != "" || CupOfCocktail.text != ""{
-        //UIDatePickerからDateを取得する
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        let drunkday = formatter.string(from: day.date)
-        
-        //データ型の変換
-        let beernumber = CupOfBeer.text
-        let beernum = Int(beernumber!)!
-        let highballnumber = CupOfHighball.text
-        let highballnum = Int(highballnumber!)!
-        let winenumber = CupOfWine.text
-        let winenum = Int(winenumber!)!
-        let cocktailnumber = CupOfCocktail.text
-        let cocktailnum = Int(cocktailnumber!)!
-        
-        //データ書き込み
-        print("データ書き込み開始")
-        let realm = try! Realm()
-        try! realm.write{
-            //日付表示の内容とスケジュール入力の内容が書き込まれる。
-            let Events = [Event(value: ["date": drunkday, "beer": beernum, "highball": highballnum, "wine": winenum, "cocktail": cocktailnum, "hungover": whichisswitch])]
-            realm.add(Events)
-            print("データ書き込み中")
-        }
-        print("データ書き込み完了")
-        
-    }else{
-    warning.text = "数字を入力してください"
+        if CupOfBeer.text == nil || CupOfHighball.text == nil || CupOfWine.text == nil || CupOfCocktail.text == nil{
+            CupOfBeer.text = "0"
+            CupOfHighball.text = "0"
+            CupOfWine.text = "0"
+            CupOfCocktail.text = "0"
+    }
+            //UIDatePickerからDateを取得する
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd"
+            let drunkday = formatter.string(from: day.date)
+            
+            //データ型の変換
+            let beernumber = CupOfBeer.text!
+            let beernum = Int(beernumber) ?? 0
+            let highballnumber = CupOfHighball.text!
+            let highballnum = Int(highballnumber) ?? 0
+            let winenumber = CupOfWine.text!
+            let winenum = Int(winenumber) ?? 0
+            let cocktailnumber = CupOfCocktail.text!
+            let cocktailnum = Int(cocktailnumber) ?? 0
+            
+            //データ書き込み
+            print("データ書き込み開始")
+            let realm = try! Realm()
+            try! realm.write{
+                //日付表示の内容とスケジュール入力の内容が書き込まれる。
+                let Events = [Event(value: ["date": drunkday, "beer": beernum, "highball": highballnum, "wine": winenum, "cocktail": cocktailnum, "hungover": whichisswitch])]
+                realm.add(Events)
+                print("データ書き込み中")
+            }
+            print("データ書き込み完了")
+            
     }
         }
-
-}
 

@@ -175,15 +175,8 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="508"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36Q-jG-q0B">
-                                <rect key="frame" x="51" y="446" width="218" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="今日は何杯まで飲める？？">
-                                    <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isR-B4-5Pe">
-                                <rect key="frame" x="51" y="104" width="218" height="97"/>
+                                <rect key="frame" x="51" y="226" width="218" height="97"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -193,8 +186,6 @@
                         <constraints>
                             <constraint firstItem="isR-B4-5Pe" firstAttribute="top" secondItem="gbV-Vw-zIx" secondAttribute="top" constant="151" id="9Z6-4c-d8o"/>
                             <constraint firstItem="isR-B4-5Pe" firstAttribute="leading" secondItem="gbV-Vw-zIx" secondAttribute="leading" constant="81" id="IhH-pk-1oE"/>
-                            <constraint firstItem="36Q-jG-q0B" firstAttribute="centerX" secondItem="khk-qI-two" secondAttribute="centerX" id="NNF-sl-ftx"/>
-                            <constraint firstItem="36Q-jG-q0B" firstAttribute="top" secondItem="gbV-Vw-zIx" secondAttribute="top" constant="236" id="TPB-LG-Myb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gbV-Vw-zIx"/>
                     </view>

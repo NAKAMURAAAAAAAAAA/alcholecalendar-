@@ -76,6 +76,8 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         let dataString = formatter.string(from: date)
         if hungoverDays.contains(dataString){
         return UIColor.red
+        }else if CupOfBeer.text == nil || CupOfHighball.text == nil || CupOfWine.text == nil || CupOfCocktail.text == nil{
+            
         }else{
             return nil
         }
