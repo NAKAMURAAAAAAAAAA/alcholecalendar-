@@ -11,6 +11,7 @@ import RealmSwift
 
 class SecondViewController: UIViewController{
 
+    @IBOutlet weak var warning: UILabel!
     @IBOutlet weak var day: UIDatePicker!
     @IBOutlet weak var CupOfBeer: UITextField!
     @IBOutlet weak var CupOfHighball: UITextField!
@@ -54,6 +55,7 @@ class SecondViewController: UIViewController{
     //ここまでtextfieldを数字にする
     
     @IBAction func Done(_ sender: Any) {
+        if CupOfBeer.text != "" || CupOfHighball.text != "" || CupOfWine.text != "" || CupOfCocktail.text != ""{
         //UIDatePickerからDateを取得する
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
@@ -80,8 +82,10 @@ class SecondViewController: UIViewController{
         }
         print("データ書き込み完了")
         
+    }else{
+    warning.text = "数字を入力してください"
     }
-
+        }
 
 }
 
