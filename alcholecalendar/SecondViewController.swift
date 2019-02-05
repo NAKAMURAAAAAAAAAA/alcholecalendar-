@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController{
 
     @IBOutlet weak var day: UIDatePicker!
     @IBOutlet weak var CupOfBeer: UITextField!
@@ -25,6 +25,34 @@ class SecondViewController: UIViewController {
             whichisswitch = false
         }
     }
+    
+    //textfieldを数字にする
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        let ts = [CupOfBeer, CupOfHighball, CupOfWine, CupOfCocktail]
+        for t in ts{
+            t?.keyboardType = UIKeyboardType.numberPad
+        }
+        //Doneボタン
+        let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
+        kbToolBar.sizeToFit()  // 画面幅に合わせてサイズを変更
+        // スペーサー
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        // 閉じるボタン
+        let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.commitButtonTapped))
+        kbToolBar.items = [spacer, commitButton]
+        for t in ts{
+            t?.inputAccessoryView = kbToolBar
+        }
+    }
+    
+    @objc func commitButtonTapped() {
+        self.view.endEditing(true)
+    }
+    //ここまでtextfieldを数字にする
+    
     @IBAction func Done(_ sender: Any) {
         //UIDatePickerからDateを取得する
         let formatter = DateFormatter()
@@ -52,14 +80,6 @@ class SecondViewController: UIViewController {
         }
         print("データ書き込み完了")
         
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        CupOfBeer.keyboardType = UIKeyboardType.numberPad
-        CupOfHighball.keyboardType = UIKeyboardType.numberPad
-        CupOfWine.keyboardType = UIKeyboardType.numberPad
-        CupOfCocktail.keyboardType = UIKeyboardType.numberPad
     }
 
 
