@@ -13,8 +13,18 @@ import RealmSwift
 
 
 class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance  {
-    
 
+    //飲み物文字
+    @IBOutlet weak var cocktailtext: UILabel!
+    @IBOutlet weak var winetext: UILabel!
+    @IBOutlet weak var highballtext: UILabel!
+    @IBOutlet weak var beertext: UILabel!
+//飲み物画像
+    @IBOutlet weak var cocktail: UIImageView!
+    @IBOutlet weak var wine: UIImageView!
+    @IBOutlet weak var beer: UIImageView!
+    @IBOutlet weak var highball: UIImageView!
+//他機能
     @IBOutlet weak var showdate: UILabel!
     @IBOutlet weak var showhungover: UILabel!
     @IBOutlet weak var showbeer: UILabel!
@@ -46,17 +56,38 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         showhighball.text = ""
         showwine.text = ""
         showcocktail.text = ""
+        self.beer.image = UIImage(named: "")
+        self.highball.image = UIImage(named: "")
+        self.wine.image = UIImage(named: "")
+        self.cocktail.image = UIImage(named: "")
+        beertext.text = ""
+        highballtext.text = ""
+        winetext.text = ""
+        cocktailtext.text = ""
+        
+        
         for ev in result {
             if ev.date == da {
-                showbeer.text = "ビール　× \(ev.beer)杯"
-                showhighball.text = "ハイボール　× \(ev.highball)杯"
-                showwine.text = "ワイン　× \(ev.wine)杯"
-                showcocktail.text = "カクテル　× \(ev.cocktail)杯"
+                self.beer.image = UIImage(named: "beer")
+                self.highball.image = UIImage(named: "highball")
+                self.wine.image = UIImage(named: "wine")
+                self.cocktail.image = UIImage(named: "cocktail")
+                beertext.text = "ビール"
+                highballtext.text = "ハイボール"
+                winetext.text = "ワイン"
+                cocktailtext.text = "カクテル"
+                
+                showbeer.text = "× \(ev.beer)杯"
+                showhighball.text = "× \(ev.highball)杯"
+                showwine.text = "× \(ev.wine)杯"
+                showcocktail.text = "× \(ev.cocktail)杯"
                 
                 if ev.hungover == true{
                     showhungover.text = "二日酔い飲み"
+                    
                 }else{
                     showhungover.text = "適正飲酒"
+                    
                 }
             }
         }
@@ -85,7 +116,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         let dataString = formatter.string(from: date)
         
         if hungoverDays.contains(dataString){
-        return UIColor.blue
+            return UIColor.yellow
         }else if drinkDays.contains(dataString){
             return UIColor.red
         }else{

@@ -11,12 +11,13 @@ import RealmSwift
 
 class ThirdViewController: UIViewController {
 
+   
     @IBOutlet weak var CupOfHungover: UILabel!
     
     func getstatus() -> String?{
         let realm = try! Realm()
         let results = realm.objects(Event.self).filter("hungover == true")
-        
+        if results.count > 1{
         var sum = 0
         for res in results{
             let alchole = res.beer + res.highball + res.wine + res.cocktail
@@ -24,7 +25,10 @@ class ThirdViewController: UIViewController {
         }
         // CupOfHungover.text = "あなたは\(sum / results.count)杯飲むと二日酔いになるでしょう"
         // return CupOfHungover.text
-        return "あなたは\(sum / results.count)杯飲むと二日酔いになるでしょう"
+        return "\(sum / results.count)杯"
+        }else{
+            return "NODATA"
+        }
     }
     
     
