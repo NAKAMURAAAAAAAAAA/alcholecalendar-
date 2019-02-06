@@ -65,23 +65,53 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         let realm = try! Realm()
-        let result = realm.objects(Event.self).filter("hungover == true")
+        
+        let drinkdays = realm.objects(Event.self).filter("beer > 0 || highball > 0 || wine > 0 || cocktail > 0")
+        let hungoverdays = realm.objects(Event.self).filter("hungover == true")
+        
+        var drinkDays = [String]()
         var hungoverDays = [String]()
-        for event in result{
-                hungoverDays.append(event.date)
+        
+        for drinkday in drinkdays{
+            drinkDays.append(drinkday.date)
+        }
+        
+        for hungoverday in hungoverdays{
+            hungoverDays.append(hungoverday.date)
         }
         // cellのデザインを変更
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         let dataString = formatter.string(from: date)
+        
         if hungoverDays.contains(dataString){
-        return UIColor.red
-        }else if CupOfBeer.text == nil || CupOfHighball.text == nil || CupOfWine.text == nil || CupOfCocktail.text == nil{
-            
+        return UIColor.blue
+        }else if drinkDays.contains(dataString){
+            return UIColor.red
         }else{
             return nil
         }
     }
+    /*func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        let realm = try! Realm()
+        let result = realm.objects(Event.self).filter("beer > 0 || highball > 0 || wine > 0 || cocktail > 0")
+        //hungoverDays配列に("hungover == true")のString型が代入されている
+        var hungoverDays = [String]()
+        for event in result{
+            hungoverDays.append(event.date)
+        }
+        // cellのデザインを変更
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        //dateStringはカレンダーの日程と接続されている
+        let dataString = formatter.string(from: date)
+        
+        if hungoverDays.contains(dataString){
+            return UIColor.red
+        }else{
+            return nil
+        }
+    }*/
     
 
     /*
