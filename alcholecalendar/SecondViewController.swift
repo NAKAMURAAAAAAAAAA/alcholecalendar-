@@ -79,7 +79,15 @@ class SecondViewController: UIViewController{
             //データ書き込み
             print("データ書き込み開始")
             let realm = try! Realm()
-            try! realm.write{
+        
+        let events = realm.objects(Event.self).filter("date == %@", drunkday)
+        events.forEach{(event)in
+            try! realm.write(){
+                realm.delete(event)
+            }
+        }
+        
+            try! realm.write(){
                 //日付表示の内容とスケジュール入力の内容が書き込まれる。
                 let Events = [Event(value: ["date": drunkday, "beer": beernum, "highball": highballnum, "wine": winenum, "cocktail": cocktailnum, "hungover": whichisswitch])]
                 realm.add(Events)

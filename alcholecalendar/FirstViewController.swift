@@ -94,6 +94,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         
     }
     
+    
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         let realm = try! Realm()
         
@@ -116,9 +117,9 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         let dataString = formatter.string(from: date)
         
         if hungoverDays.contains(dataString){
-            return UIColor.yellow
-        }else if drinkDays.contains(dataString){
             return UIColor.red
+        }else if drinkDays.contains(dataString){
+            return UIColor.yellow
         }else{
             return nil
         }
