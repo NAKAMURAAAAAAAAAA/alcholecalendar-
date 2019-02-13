@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "ハイボール"; ObjectID = "0J8-jY-Rwh"; */
+"0J8-jY-Rwh.text" = "ハイボール";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "3OQ-VF-fLz"; */
+"3OQ-VF-fLz.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "決定"; ObjectID = "3R7-Zj-Phy"; */
+"3R7-Zj-Phy.normalTitle" = "決定";
+
+/* Class = "UILabel"; text = "カクテル"; ObjectID = "aO1-ct-xYk"; */
+"aO1-ct-xYk.text" = "カクテル";
+
+/* Class = "UITabBarItem"; title = "追加"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "追加";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "crW-HT-axt"; */
+"crW-HT-axt.text" = "0";
+
+/* Class = "UILabel"; text = "ビール"; ObjectID = "FeW-us-LGY"; */
+"FeW-us-LGY.text" = "ビール";
+
+/* Class = "UITabBarItem"; title = "カレンダー"; ObjectID = "GED-an-Yp5"; */
+"GED-an-Yp5.title" = "カレンダー";
+
+/* Class = "UILabel"; text = "二日酔い予報"; ObjectID = "jaN-j9-Ihh"; */
+"jaN-j9-Ihh.text" = "二日酔い予報";
+
+/* Class = "UILabel"; text = "二日酔い"; ObjectID = "Jdr-Ip-hrm"; */
+"Jdr-Ip-hrm.text" = "二日酔い";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "kkI-hO-4k7"; */
+"kkI-hO-4k7.text" = "0";
+
+/* Class = "UILabel"; text = "あなたが二日酔いになる杯数は"; ObjectID = "qCn-p2-bPH"; */
+"qCn-p2-bPH.text" = "あなたが二日酔いになる杯数は";
+
+/* Class = "UILabel"; text = "ワイン"; ObjectID = "SOh-VO-Rl8"; */
+"SOh-VO-Rl8.text" = "ワイン";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "TUM-5k-hus"; */
+"TUM-5k-hus.text" = "0";
+
+/* Class = "UITabBarItem"; title = "限界"; ObjectID = "YJC-Wx-TVF"; */
+"YJC-Wx-TVF.title" = "限界";
+

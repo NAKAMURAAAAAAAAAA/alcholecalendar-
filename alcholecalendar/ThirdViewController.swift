@@ -16,18 +16,16 @@ class ThirdViewController: UIViewController {
     
     func getstatus() -> String?{
         let realm = try! Realm()
-        let results = realm.objects(Event.self).filter("hungover == true")
+        let results = realm.objects(Event.self).filter("hungover == true && (beer > 0 || highball > 0 || wine > 0 || cocktail > 0)")
         if results.count > 1{
         var sum = 0
         for res in results{
             let alchole = res.beer + res.highball + res.wine + res.cocktail
             sum += alchole
         }
-        // CupOfHungover.text = "あなたは\(sum / results.count)杯飲むと二日酔いになるでしょう"
-        // return CupOfHungover.text
         return "\(sum / results.count)杯"
         }else{
-            return "NODATA"
+            return "二日酔いデータ不足"
         }
     }
     

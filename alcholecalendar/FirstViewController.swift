@@ -33,13 +33,16 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
     @IBOutlet weak var showcocktail: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //ボタン
+    @IBOutlet weak var deletebutton: UIButton!
+    
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         //日程の表示
         let formatter = DateFormatter()
@@ -65,9 +68,9 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         winetext.text = ""
         cocktailtext.text = ""
         
-        
         for ev in result {
-            if ev.date == da {
+            if ev.date == da && (ev.beer > 0 || ev.highball > 0 || ev.wine > 0 || ev.cocktail > 0){
+                
                 self.beer.image = UIImage(named: "beer")
                 self.highball.image = UIImage(named: "highball")
                 self.wine.image = UIImage(named: "wine")
@@ -84,10 +87,8 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
                 
                 if ev.hungover == true{
                     showhungover.text = "二日酔い飲み"
-                    
                 }else{
                     showhungover.text = "適正飲酒"
-                    
                 }
             }
         }
@@ -99,7 +100,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         let realm = try! Realm()
         
         let drinkdays = realm.objects(Event.self).filter("beer > 0 || highball > 0 || wine > 0 || cocktail > 0")
-        let hungoverdays = realm.objects(Event.self).filter("hungover == true")
+        let hungoverdays = realm.objects(Event.self).filter("hungover == true && (beer > 0 || highball > 0 || wine > 0 || cocktail > 0)")
         
         var drinkDays = [String]()
         var hungoverDays = [String]()
@@ -124,26 +125,6 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
             return nil
         }
     }
-    /*func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
-        let realm = try! Realm()
-        let result = realm.objects(Event.self).filter("beer > 0 || highball > 0 || wine > 0 || cocktail > 0")
-        //hungoverDays配列に("hungover == true")のString型が代入されている
-        var hungoverDays = [String]()
-        for event in result{
-            hungoverDays.append(event.date)
-        }
-        // cellのデザインを変更
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        //dateStringはカレンダーの日程と接続されている
-        let dataString = formatter.string(from: date)
-        
-        if hungoverDays.contains(dataString){
-            return UIColor.red
-        }else{
-            return nil
-        }
-    }*/
     
 
     /*
