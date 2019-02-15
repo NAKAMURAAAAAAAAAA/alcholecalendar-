@@ -25,7 +25,7 @@ class ThirdViewController: UIViewController {
         }
         return "\(sum / results.count)杯"
         }else{
-            return "二日酔いデータ不足"
+            return "二日酔い\nデータ不足"
         }
     }
     

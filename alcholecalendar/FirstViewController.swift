@@ -42,8 +42,50 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
     
     //ボタン
     @IBOutlet weak var deletebutton: UIButton!
+    @IBOutlet weak var calendar: FSCalendar!
+    
+    
+    var selectedDate: Date?
+    
+    @IBAction func tapDeleteButtonAction(_ sender: Any) {
+        //selectedDateがnilではない場合
+        if let date = selectedDate{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let drunkday = formatter.string(from: date)
+            
+            //イベント削除
+            let realm = try! Realm()
+            let events = realm.objects(Event.self).filter("date == %@", drunkday)
+            events.forEach{(event)in
+                try! realm.write(){
+                    realm.delete(event)
+                }
+            }
+            //カレンダーの更新
+            calendar.reloadData()
+            
+            //textfieldの初期化
+            showhungover.text = ""
+            showbeer.text = ""
+            showhighball.text = ""
+            showwine.text = ""
+            showcocktail.text = ""
+            
+            beertext.text = ""
+            highballtext.text = ""
+            winetext.text = ""
+            cocktailtext.text = ""
+     }
+    }
+    
+    
+    
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+        selectedDate = date
+        
         //日程の表示
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
@@ -59,10 +101,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         showhighball.text = ""
         showwine.text = ""
         showcocktail.text = ""
-        self.beer.image = UIImage(named: "")
-        self.highball.image = UIImage(named: "")
-        self.wine.image = UIImage(named: "")
-        self.cocktail.image = UIImage(named: "")
+        
         beertext.text = ""
         highballtext.text = ""
         winetext.text = ""
@@ -70,11 +109,6 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         
         for ev in result {
             if ev.date == da && (ev.beer > 0 || ev.highball > 0 || ev.wine > 0 || ev.cocktail > 0){
-                
-                self.beer.image = UIImage(named: "beer")
-                self.highball.image = UIImage(named: "highball")
-                self.wine.image = UIImage(named: "wine")
-                self.cocktail.image = UIImage(named: "cocktail")
                 beertext.text = "ビール"
                 highballtext.text = "ハイボール"
                 winetext.text = "ワイン"
@@ -87,8 +121,10 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
                 
                 if ev.hungover == true{
                     showhungover.text = "二日酔い飲み"
+                    showhungover.textColor = UIColor.red
                 }else{
                     showhungover.text = "適正飲酒"
+                    showhungover.textColor = UIColor.orange
                 }
             }
         }
@@ -120,7 +156,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         if hungoverDays.contains(dataString){
             return UIColor.red
         }else if drinkDays.contains(dataString){
-            return UIColor.yellow
+            return UIColor.orange
         }else{
             return nil
         }
