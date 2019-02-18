@@ -12,25 +12,23 @@ import CalculateCalendarLogic
 import RealmSwift
 
 
-class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance  {
+class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance, UITableViewDelegate, UITableViewDataSource  {
 
-    //飲み物文字
+    /*    //飲み物文字
     @IBOutlet weak var cocktailtext: UILabel!
     @IBOutlet weak var winetext: UILabel!
     @IBOutlet weak var highballtext: UILabel!
     @IBOutlet weak var beertext: UILabel!
-//飲み物画像
-    @IBOutlet weak var cocktail: UIImageView!
-    @IBOutlet weak var wine: UIImageView!
-    @IBOutlet weak var beer: UIImageView!
-    @IBOutlet weak var highball: UIImageView!
+     */
 //他機能
     @IBOutlet weak var showdate: UILabel!
     @IBOutlet weak var showhungover: UILabel!
+/*
     @IBOutlet weak var showbeer: UILabel!
     @IBOutlet weak var showhighball: UILabel!
     @IBOutlet weak var showwine: UILabel!
     @IBOutlet weak var showcocktail: UILabel!
+ */
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -66,7 +64,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
             calendar.reloadData()
             
             //textfieldの初期化
-            showhungover.text = ""
+  /*          showhungover.text = ""
             showbeer.text = ""
             showhighball.text = ""
             showwine.text = ""
@@ -76,6 +74,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
             highballtext.text = ""
             winetext.text = ""
             cocktailtext.text = ""
+ */
      }
     }
     
@@ -97,6 +96,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         let result = realm.objects(Event.self).filter("date = '\(da)'")
         
         showhungover.text = ""
+        /*
         showbeer.text = ""
         showhighball.text = ""
         showwine.text = ""
@@ -106,18 +106,21 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         highballtext.text = ""
         winetext.text = ""
         cocktailtext.text = ""
+ */
         
         for ev in result {
             if ev.date == da && (ev.beer > 0 || ev.highball > 0 || ev.wine > 0 || ev.cocktail > 0){
+/*
                 beertext.text = "ビール"
                 highballtext.text = "ハイボール"
                 winetext.text = "ワイン"
-                cocktailtext.text = "カクテル"
+                cocktailtext.text = "チューハイ"
                 
                 showbeer.text = "× \(ev.beer)杯"
                 showhighball.text = "× \(ev.highball)杯"
                 showwine.text = "× \(ev.wine)杯"
                 showcocktail.text = "× \(ev.cocktail)杯"
+ */
                 
                 if ev.hungover == true{
                     showhungover.text = "二日酔い飲み"
@@ -159,6 +162,33 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
             return UIColor.orange
         }else{
             return nil
+        }
+    }
+    
+    let kindofdrinks = ["beer", "highball", "wine", "cocktail"]
+    //Tableview用
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    //追加④ セルに値を設定するデータソースメソッド（必須）
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // セルを取得する
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        //selectedDateがnilではない場合
+        if let date = selectedDate{
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy/MM/dd"
+            let drunkday = formatter.string(from: date)
+            
+            let realm = try! Realm()
+            let events = realm.objects(Event.self).filter("date == %@", drunkday)
+            
+            cell.textLabel?.text = kindofdrinks[indexPath.row]
+        return cell
+        }else{
+            cell.textLabel?.text = ""
+            return cell
         }
     }
     
