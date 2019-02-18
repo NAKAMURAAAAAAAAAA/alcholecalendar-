@@ -165,7 +165,7 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
         }
     }
     
-    let kindofdrinks = ["beer", "highball", "wine", "cocktail"]
+    var kindofdrinks = [String]()
     //Tableview用
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -184,7 +184,14 @@ class FirstViewController: UIViewController, FSCalendarDelegate, FSCalendarDataS
             let realm = try! Realm()
             let events = realm.objects(Event.self).filter("date == %@", drunkday)
             
-            cell.textLabel?.text = kindofdrinks[indexPath.row]
+            for event in events{
+                kindofdrinks.append("\(event.beer)")
+                kindofdrinks.append("\(event.highball)")
+                kindofdrinks.append("\(event.wine)")
+                kindofdrinks.append("\(event.cocktail)")
+                cell.textLabel?.text = kindofdrinks[indexPath.row] as! String
+            }
+            
         return cell
         }else{
             cell.textLabel?.text = ""
